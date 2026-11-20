@@ -74,7 +74,7 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ------------------------------------------------------------------ data layer
 @st.cache_data(show_spinner="Loading Ola ride data...")
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv(ROOT / "data" / "ola_cleaned.csv", parse_dates=["Date", "Booking_Datetime"])
+    df = pd.read_csv(ROOT / "data" / "ola_cleaned.csv.gz", parse_dates=["Date", "Booking_Datetime"])
     return df
 
 @st.cache_resource
