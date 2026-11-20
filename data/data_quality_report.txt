@@ -1,0 +1,46 @@
+Raw shape: (103024, 20)
+Date range: 2024-07-01 00:00:00 -> 2024-07-31 23:58:00
+
+== Missing values (raw) ==
+V_TAT                         39057
+C_TAT                         39057
+Canceled_Rides_by_Customer    92525
+Canceled_Rides_by_Driver      84590
+Incomplete_Rides              39057
+Incomplete_Rides_Reason       99098
+Payment_Method                39057
+Driver_Ratings                39057
+Customer_Rating               39057
+
+Duplicate Booking_IDs : 0
+Duplicate full rows    : 0
+Unique customers       : 94,544
+
+== Integrity checks (cleaned) ==
+Ratings only on Success rides      : True
+Ratings within 1-5 (actual 3.0-5.0)  : True
+Distance = 0 on all non-Success    : True
+Customer-cancel reason only when 'Canceled by Customer': True
+Driver-cancel reason only when 'Canceled by Driver'    : True
+'Success' rides flagged Incomplete=Yes: 3,926 (status says Success but ride was not finished -> flagged for review)
+Booking_Value range: 100 - 2999  (median 386)
+Booking_Value IQR-outliers (> 1190): 8,468 (8.2%) - kept, plausible long/surge fares
+
+Cleaned shape: (103024, 33)  -> data/ola_cleaned.csv, data/ola_rides.db
+
+== EDA highlights ==
+Booking_Status
+Success                 62.09
+Canceled by Driver      17.89
+Canceled by Customer    10.19
+Driver Not Found         9.83
+
+Success rides - mean distance by vehicle:
+Vehicle_Type
+Auto           10.04
+Bike           24.93
+E-Bike         25.15
+Mini           24.98
+Prime Plus     25.03
+Prime SUV      24.88
+Prime Sedan    25.01
